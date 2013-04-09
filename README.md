@@ -7,9 +7,6 @@ This Grunt plugin and has not been tested thorougly yet so use it at your own ri
 
 For now the plugin supports only one PHPDocumentor call : ```phpdoc -d dir -t target```.
 
-Also, as this plugin is not stable for now we did not add it to the [Grunt plugins npm repository](http://gruntjs.com/plugins).
-
-
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
 
