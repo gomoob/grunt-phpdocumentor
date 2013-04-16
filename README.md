@@ -63,4 +63,4 @@ Path where to store the generated output. It will default to a folder named 'doc
 ```grunt phpdocumentor```
 
 ## Release History
-_(Nothing yet)_
+0.3.0 - Including ```phpDocumentor version 2.0.0a12``` on the bin, giving default to all options
