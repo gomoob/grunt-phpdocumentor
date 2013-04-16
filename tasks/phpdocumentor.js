@@ -62,7 +62,8 @@ module.exports = function(grunt) {
             
         }
         
-        var phpDocumentorCommand = 'phpdoc';
+        // allow to specify the path for the bin, this can be used later to include the phpdoc 'phar' version with this task 
+        var phpDocumentorCommand = this.data.bin || 'phpdoc';
         
         phpDocumentorCommand += ' --target=' + options.target;
         phpDocumentorCommand += ' --directory=' + options.directory;

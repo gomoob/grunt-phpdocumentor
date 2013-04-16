@@ -31,6 +31,7 @@ In your project's Gruntfile, add a section named `phpdocumentor` to the data obj
 grunt.initConfig({
   phpdocumentor: {
     options : {
+      bin: '/different/path/to/phpdoc',
       directory : 'src/main/php/config,src/main/php/library,src/main/php/module',
       target : 'target/phpdocumentor'
     }, 
@@ -44,6 +45,12 @@ grunt.initConfig({
 ```
 
 ### Options
+
+#### options.bin( optional )
+Type: `String`
+Default value: `phpdoc`
+
+Path to the phpdoc executable, by default it will try the command itself.
 
 #### options.directory
 Type: `String`
