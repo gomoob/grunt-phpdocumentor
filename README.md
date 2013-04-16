@@ -46,13 +46,13 @@ Default value: `phpdoc`
 
 Path to the phpdoc executable, by default it will use the one that come with task. It is located on the bin folder.
 
-#### options.directory
+#### options.directory( optional )
 Type: `String`
 Default value: `./`
 
 Comma-separated list of directories to (recursively) parse (multiple values allowed). It will default to the folder where Gruntfile is located.
 
-#### options.target
+#### options.target( optional )
 Type: `String`
 Default value: `docs`
 
