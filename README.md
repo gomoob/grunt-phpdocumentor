@@ -2,8 +2,7 @@
 
 > Runs the PHPDocumentor documentation generator tool.
 
-## WARNING
-This Grunt plugin and has not been tested thorougly yet so use it at your own risk ! 
+This build include phpDocumentor version 2.0.0a12, other versions can be specified by the `bin` option 
 
 For now the plugin supports only one PHPDocumentor call : ```phpdoc -d dir -t target```.
 
@@ -30,16 +29,11 @@ In your project's Gruntfile, add a section named `phpdocumentor` to the data obj
 ```js
 grunt.initConfig({
   phpdocumentor: {
-    options : {
-      bin: '/different/path/to/phpdoc',
-      directory : 'src/main/php/config,src/main/php/library,src/main/php/module',
-      target : 'target/phpdocumentor'
-    }, 
-                    
-    /**
-     * Target used to generate the PHP documentation of the project.
-     */
-    generate : {}
+    dist: {
+        bin: 'bin/phpdoc',
+        directory : './',
+        target : 'docs'
+    }                
   },
 })
 ```
@@ -50,19 +44,19 @@ grunt.initConfig({
 Type: `String`
 Default value: `phpdoc`
 
-Path to the phpdoc executable, by default it will try the command itself.
+Path to the phpdoc executable, by default it will use the one that come with task. It is located on the bin folder.
 
 #### options.directory
 Type: `String`
-Default value: `TODO`
+Default value: `./`
 
-Comma-separated list of directories to (recursively) parse (multiple values allowed)
+Comma-separated list of directories to (recursively) parse (multiple values allowed). It will default to the folder where Gruntfile is located.
 
 #### options.target
 Type: `String`
-Default value: `TODO`
+Default value: `docs`
 
-Path where to store the generated output.
+Path where to store the generated output. It will default to a folder named 'docs' 
 
 ### Usage Examples
 

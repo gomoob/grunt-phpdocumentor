@@ -1,13 +1,18 @@
 {
   "name": "grunt-phpdocumentor",
   "description": "Runs the PHPDocumentor documentation generator tool.",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "homepage": "https://github.com/gomoob/grunt-phpdocumentor",
   "author": {
     "name": "Baptiste Gaillard",
     "email": "baptiste.gaillard@gomoob.com",
     "url": "http://www.gomoob.com"
   },
+  "contributors": [{
+    "name": "Mitermayer Reis",
+    "email": "mitermayer.reis@gmail.com",
+    "url": "http://job.mitermayer.com"
+  }],
   "repository": {
     "type": "git",
     "url": "git://github.com/gomoob/grunt-phpdocumentor"
@@ -29,6 +34,7 @@
     "test": "grunt test"
   },
   "devDependencies": {
+    "lodash": "~1.1.1",
     "grunt-contrib-jshint": "~0.1.1",
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-nodeunit": "~0.1.2",
