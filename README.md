@@ -60,7 +60,7 @@ Path where to store the generated output. It will default to a folder named 'doc
 
 ### Usage Examples
 
-```grunt phpdocumentor:generate```
+```grunt phpdocumentor```
 
 ## Release History
 _(Nothing yet)_
