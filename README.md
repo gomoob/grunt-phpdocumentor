@@ -2,10 +2,9 @@
 
 > Runs the PHPDocumentor documentation generator tool.
 
-## WARNING
-This Grunt plugin and has not been tested thorougly yet so use it at your own risk ! 
+This build include phpDocumentor version 2.0.0a12, other versions can be specified by the `bin` option 
 
-For now the plugin supports only one PHPDocumentor call : ```phpdoc -d dir -t target```.
+This plugin runs the command : ```phpdoc -d dir -t target```.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
@@ -30,36 +29,38 @@ In your project's Gruntfile, add a section named `phpdocumentor` to the data obj
 ```js
 grunt.initConfig({
   phpdocumentor: {
-    options : {
-      directory : 'src/main/php/config,src/main/php/library,src/main/php/module',
-      target : 'target/phpdocumentor'
-    }, 
-                    
-    /**
-     * Target used to generate the PHP documentation of the project.
-     */
-    generate : {}
+    dist: {
+        bin: 'bin/phpdoc',
+        directory : './',
+        target : 'docs'
+    }                
   },
 })
 ```
 
 ### Options
 
-#### options.directory
+#### options.bin( optional )
 Type: `String`
-Default value: `TODO`
+Default value: `phpdoc`
 
-Comma-separated list of directories to (recursively) parse (multiple values allowed)
+Path to the phpdoc executable, by default it will use the one that come with task. It is located on the bin folder.
 
-#### options.target
+#### options.directory( optional )
 Type: `String`
-Default value: `TODO`
+Default value: `./`
 
-Path where to store the generated output.
+Comma-separated list of directories to (recursively) parse (multiple values allowed). It will default to the folder where Gruntfile is located.
+
+#### options.target( optional )
+Type: `String`
+Default value: `docs`
+
+Path where to store the generated output. It will default to a folder named 'docs' 
 
 ### Usage Examples
 
-```grunt phpdocumentor:generate```
+```grunt phpdocumentor```
 
 ## Release History
-_(Nothing yet)_
+0.3.0 - Including ```phpDocumentor version 2.0.0a12``` on the bin, giving default to all options
