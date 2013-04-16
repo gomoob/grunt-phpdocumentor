@@ -4,7 +4,7 @@
 
 This build include phpDocumentor version 2.0.0a12, other versions can be specified by the `bin` option 
 
-For now the plugin supports only one PHPDocumentor call : ```phpdoc -d dir -t target```.
+This plugin runs the command : ```phpdoc -d dir -t target```.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.1`
