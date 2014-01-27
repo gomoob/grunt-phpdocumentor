@@ -2,7 +2,7 @@
 
 > Runs the PHPDocumentor documentation generator tool.
 
-This build include phpDocumentor version 2.0.0a12, other versions can be specified by the `bin` option 
+This build include phpDocumentor version 2.2.0, other versions can be specified by the `bin` option 
 
 This plugin runs the command : ```phpdoc -d dir -t target```.
 
@@ -62,6 +62,9 @@ Path where to store the generated output. It will default to a folder named 'doc
 
 ```grunt phpdocumentor```
 
+## Release History
+0.3.0 - Including ```phpDocumentor version 2.0.0a12``` on the bin, giving default to all options
+
 ## Roadmap
 
 ### 0.4.0
@@ -73,6 +76,3 @@ Path where to store the generated output. It will default to a folder named 'doc
  * Upgrade the `grunt-contrib-jshint` Grunt Plugin
  * Upgrade the `grunt-contrib-clean` Grunt Plugin
  * Upgrade the `grunt-contrib-nodeunit`Grunt Plugin
-
-## Release History
-0.3.0 - Including ```phpDocumentor version 2.0.0a12``` on the bin, giving default to all options
