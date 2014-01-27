@@ -62,5 +62,17 @@ Path where to store the generated output. It will default to a folder named 'doc
 
 ```grunt phpdocumentor```
 
+## Roadmap
+
+### 0.4.0
+
+ * Creates a `develop` branch
+ * Upgrade to `phpDocumentor.phar' file to phpDocumentor 2.2.0
+ * Improves documentation
+ * Publish to npm registry
+ * Upgrade the `grunt-contrib-jshint` Grunt Plugin
+ * Upgrade the `grunt-contrib-clean` Grunt Plugin
+ * Upgrade the `grunt-contrib-nodeunit`Grunt Plugin
+
 ## Release History
 0.3.0 - Including ```phpDocumentor version 2.0.0a12``` on the bin, giving default to all options
