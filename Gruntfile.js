@@ -32,20 +32,24 @@ module.exports = function(grunt) {
         // Configuration to be run (and then tested).
         phpdocumentor : {
             
-            /**
-             * Sample target used to call a PHPDocumentor command like 'phpdoc -d dir -t target'
-             */
-            directory_target : {
-
+            // Configuration used by the 'testWithCustomPharFile()' unit test method
+            testWithCustomPharFile : {
                 options : {
-                    directory : 'test/fixtures/directory_target',
-                    target : 'tmp/directory_target'
+                    phar : 'test/fixtures/phpDocumentor.phar',
+                    target : 'target/testWithCustomPharFile'
                 }
-
             },
-            
+
             // Configuration used by the 'testWithDefaultOptions()' unit test method
             testWithDefaultOptions : {},
+
+            // Configuration used by the 'testWithNullPhar()' unit test method
+            testWithNullPhar : {
+                options : {
+                    phar : null,
+                    target : 'target/testWithNullPhar'
+                }
+            },
             
             // Configuration used by the 'testWithTarget()' unit test method
             testWithTarget : {

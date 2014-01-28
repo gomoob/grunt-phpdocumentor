@@ -11,7 +11,8 @@
 // External libraries
 var ChildProcess = require('child_process'), 
     Util = require('util'), 
-    Path = require('path');
+    Path = require('path'), 
+    Fs = require('fs');
 
 /**
  * Function used to initialize the PHPDocumentor plugin, the purspose of the following function is create a 
@@ -74,13 +75,13 @@ exports.init = function(grunt) {
             parseprivate : '',
             config : ''
         };
-        
+
         // Merge task-specific and/or target-specific options with default option values.
         options = runner.options(defaults);
 
         // Create a "promise" object to indicate to Grunt when the execution of the plugin is terminated
         done = runner.async();
-        
+
         // Checks if the provided Phpdocumentor command name is valid
         if(options.command !== undefined &&
            options.command !== 'help' && 
@@ -99,36 +100,42 @@ exports.init = function(grunt) {
             done(false);
 
         }
-        
-        // Creates the path to the PhpDocumentor PHAR file, by default we use the PhpDocumentor PHAR provided with the 
-        // plugin. 
-        var phar = Path.resolve(__dirname, '../..', 'bin', 'phpDocumentor.phar');
 
         // If the 'phar' option is provided so we check the PHAR file path
         if(options.phar !== undefined && options.phar !== null) {
-            
+
             // Checks if the provided PhpDocumentor PHAR file exists
-            if(!fs.existsSynch(options.phar)) {
+            if(!Fs.existsSync(options.phar)) {
                 
                 grunt.log.error(Util.format('The path to the PhpDocumentor PHAR file provided \'%s\' does not exist !', options.phar));
                 grunt.log.error('The \'phar\' option expects an absolute path to an existing PhpDocumentor PHAR file.');
                 done(false);
 
             }
-            
-            phar = options.phar;
-            
+
+            // path to the phar file
+            // WARNING: The quotes are very important otherwise the plugin will not work if it is executed within a 
+            // directory having spaces
+            phpDocumentorCommand = 'php ';
+            phpDocumentorCommand += '"';
+            phpDocumentorCommand += options.phar;
+            phpDocumentorCommand += '"';
+
         } 
         
         // If the 'phar' option has a null value then we execute the 'phpdoc' command available
         else if(options.phar === null) {
             
-            phpDocumentorCommand = 'phpdoc';
+            phpDocumentorCommand = 'phpdoc ';
             
-        } 
+        }
         
         // If the 'phar' option is undefined then we execute phpDocumentor using the packaged phpDocumentor PHAR file
         else {
+            
+            // Creates the path to the PhpDocumentor PHAR file, by default we use the PhpDocumentor PHAR provided with the 
+            // plugin. 
+            var phar = Path.resolve(__dirname, '../..', 'bin', 'phpDocumentor.phar');
             
             // path to the phar file
             // WARNING: The quotes are very important otherwise the plugin will not work if it is executed within a 
@@ -139,12 +146,68 @@ exports.init = function(grunt) {
             phpDocumentorCommand += '"';
 
         }
-        
+
         var target    = options.target     || 'docs',
             directory = options.directory  || './';
 
-        phpDocumentorCommand += ' --target=' + target;
-        phpDocumentorCommand += ' --directory=' + directory;
+        // Providing no command or the 'run' command or the 'project:run' command is the same
+        // @see http://www.phpdoc.org/docs/latest/references/commands/project_run.html
+        if(options.command === undefined || options.command === 'run' || options.command === 'project:run') {
+
+            phpDocumentorCommand += ' --target=' + target;
+            phpDocumentorCommand += ' --directory=' + directory;
+
+            // TODO: see the help of the command with 'phpdoc help run' and add the missing options
+
+        } 
+        
+        // Manage the 'help' command
+        else if(options.command === 'help') {
+            
+            phpDocumentorCommand += ' help';
+            
+        }
+        
+        // Providing the 'parse' or 'project:parse' command is the same
+        // @see http://www.phpdoc.org/docs/latest/references/commands/project_parse.html
+        else if(options.command === 'parse' || options.command === 'project:parse') {
+            
+            phpDocumentorCommand += ' project:parse';
+            phpDocumentorCommand += ' --target=' + target;
+            phpDocumentorCommand += ' --directory=' + directory;
+                
+            // TODO: see the help of the command with 'phpdoc help parse' and add the missing options
+            
+        } 
+        
+        // Providing the 'transform' or 'project:transform' command is the same
+        // @see http://www.phpdoc.org/docs/latest/references/commands/project_transform.html
+        else if(options.command === 'transform' || options.command === 'project:transform') {
+            
+            phpDocumentorCommand += ' project:transform';
+            phpDocumentorCommand += ' --target=' + target;
+            
+            // TODO: see the help of the command with 'phpdoc help tranform' and add the missing options
+            
+        }
+        
+        // Manage the 'list' command
+        else if(options.command === 'list') {
+
+            phpDocumentorCommand += ' list';
+            
+            // TODO: see the help of the command with 'phpdoc help list' and add the missing options
+            
+        }
+        
+        // Manage the 'template:list' command
+        else if(options.command === 'template:list') {
+            
+            phpDocumentorCommand += ' template:list';            
+
+            // TODO: see the help of the command with 'phpdoc help template:list' and add the missing options
+            
+        }
 
         // Writes the PhpDocumentor command line in the console
         grunt.log.write(phpDocumentorCommand);
@@ -159,7 +222,13 @@ exports.init = function(grunt) {
         // Executes the 'php -v' command and only redirect errors to the console
         var childProcess = ChildProcess.exec('php -v', function(error, stdout, stderr) {
            
-            grunt.log.writeln(error);
+            // On success error will be null
+            if(error !== null) {
+
+                grunt.log.writeln(error);
+
+            }
+            
             grunt.log.writeln(stderr);
             
         });
@@ -225,7 +294,7 @@ exports.init = function(grunt) {
                 return done(false);
 
             }
-            
+
             // If a phpDocumentor exception have been encountered then exit with an error
             if(exceptionEncountered) {
 
@@ -234,7 +303,7 @@ exports.init = function(grunt) {
                 return done(false);
 
             }
-            
+
             grunt.verbose.ok(Util.format('Exited with code: %d.', code));
             done();
 

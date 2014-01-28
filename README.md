@@ -4,7 +4,7 @@
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
-This build include phpDocumentor version 2.2.0, other versions can be specified by the `bin` option 
+This build include phpDocumentor version 2.2.0, other versions can be specified by the `phar` option 
 
 This plugin runs the command : ```phpdoc -d dir -t target```.
 
@@ -32,10 +32,9 @@ In your project's Gruntfile, add a section named `phpdocumentor` to the data obj
 grunt.initConfig({
   phpdocumentor: {
     dist: {
-        bin: 'bin/phpdoc',
         directory : './',
         target : 'docs'
-    }                
+    }             
   },
 })
 ```
@@ -48,11 +47,51 @@ Default value: `phpdoc`
 
 Path to the phpdoc executable, by default it will use the one that come with task. It is located on the bin folder.
 
+**WARNING** : We kept this option documented here only for version `0.1.0` and `0.3.0` of the plugin. This option has 
+been remove the version `0.4.0` because it was not portable across operating systems. 
+
 #### options.directory( optional )
 Type: `String`
 Default value: `./`
 
-Comma-separated list of directories to (recursively) parse (multiple values allowed). It will default to the folder where Gruntfile is located.
+Comma-separated list of directories to (recursively) parse (multiple values allowed). It will default to the folder 
+where Gruntfile is located.
+
+#### options.phar( optional )
+Type: `String`
+Default value: undefined
+
+This option is not integrated in phpDocumentor tool and is an option specific to the Grunt phpDocumentor plugin. The 
+purpose of this option is to allow you to provide a path to a custom phpDocumentor PHAR file or to indicate to the 
+plugin to use the `phpdoc` command available in your system.
+
+If this option is not specified then the plugin will automatically use the phpDocumentor PHAR file which is integrated 
+inside it.
+
+If you want to provide a path to a custom PHAR file you have to provide it as a string : 
+
+```js
+grunt.initConfig({
+  phpdocumentor: {
+    dist: {
+        phar : 'documentation_tools/phpDocumentor.phar'
+    }             
+  },
+})
+```
+
+If you want to use the `phpdoc` command which is available on you system instead then you only have to pass the `null` 
+value to the `phar` option :
+
+```js
+grunt.initConfig({
+  phpdocumentor: {
+    dist: {
+        phar : null
+    }             
+  },
+})
+```
 
 #### options.target( optional )
 Type: `String`
@@ -66,24 +105,28 @@ Path where to store the generated output. It will default to a folder named 'doc
 
 ## Release History
 
-### 0.3.1
+### 0.4.0
  
- * Now the unit tests of the `develop` branch are executed on the GoMoob continuous integration server each time the 
+ * **BREAKING CHANGE, WARNING**: Now the `bin` option has been deleted and replaced by the `phar` option, if `null` is 
+   passed to the `phar` option then the plugin uses the `phpdoc` command available, if the `phar` option is `undefined` 
+   then the plugin uses the packaged phpDocumentor PHAR, if the `phar` option is not `null` and not `undefined` then it 
+   express a path to a phpDocumentor PHAR file on the file system
+ * Add more robust unit tests
+ * The unit tests are executed on the `develop` branch with the GoMoob continuous integration server each time the 
    source code is updated on this branch
- * Now the plugin inspects `[Exception]` in the phpDocumentor output to know if a phpDocumentor exception has been 
-   encountered and make the Grunt task fail
+ * Now the plugin inspects the `[Exception]` string in the phpDocumentor output to know if a phpDocumentor exception has 
+   been encountered and make the Grunt task fail
  * Add the build with grunt badge to the README.MD file
+ * Global documentation improvements
  * Add lot of comments in the plugin code
  * The `bin\phpdoc` bash script has been deleted because bash is not installed on all UNIX platforms and because using 
    a bash script is not portable across platforms
- * Now the `bin` option is deprecated and replaced by the `phar` option, if `null` is passed to the `phar` option then 
-   the plugin uses the `phpdoc` command available, if the `phar` option is `undefined` then the plugin uses the packaged 
-   phpDocumentor PHAR, if the `phar` option is not `null` and not `undefined` then it express a path to a phpDocumentor 
-   PHAR file on the file system
  * Upgrade the phpDocumentor PHAR to version 2.2.0 of phpDocumentor
  * Remove the use of the loadash `_.extend()` function and replace it with the standard Grunt `task.options()` function 
  * Now the plugin checks if PHP CLI is available at command line
  * Global refactoring
+ * Begin to support the execution of the `help`, `parse`, `project:parse`, `transform`, `project:transform`, `list`, 
+   `template:list` commands
 
 ### 0.3.0
 
@@ -92,9 +135,3 @@ Path where to store the generated output. It will default to a folder named 'doc
 ### 0.1.0
 
  * First release
-
-## Roadmap
-
-### 0.4.0
-
- * Any ideas ?
