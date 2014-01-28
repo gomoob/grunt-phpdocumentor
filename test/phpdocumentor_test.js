@@ -1,35 +1,94 @@
 'use strict';
 
-var grunt = require('grunt');
-
-/*
-  ======== A Handy Little Nodeunit Reference ========
-  https://github.com/caolan/nodeunit
-
-  Test methods:
-    test.expect(numAssertions)
-    test.done()
-  Test assertions:
-    test.ok(value, [message])
-    test.equal(actual, expected, [message])
-    test.notEqual(actual, expected, [message])
-    test.deepEqual(actual, expected, [message])
-    test.notDeepEqual(actual, expected, [message])
-    test.strictEqual(actual, expected, [message])
-    test.notStrictEqual(actual, expected, [message])
-    test.throws(block, [error], [message])
-    test.doesNotThrow(block, [error], [message])
-    test.ifError(value)
-*/
+var grunt = require('grunt'), 
+    fs = require('fs');
 
 exports.phpdocumentor = {
-  setUp: function(done) {
-    // setup here if necessary
-    done();
-  },
-  directory_target: function(test) {
-      test.ok(1);
 
-    test.done();
-  }
+    /**
+     * Function called before the execution of each test method.
+     * 
+     * @param {nodeunit} test a reference to nodeunit.
+     */
+    setUp: function(done) {
+
+        // The 'docs' directory is only created by the 'testWithDefaultOptions'
+        grunt.file.delete('docs');
+        
+        // Execution of our setUp method is terminated
+        done();
+    
+    },
+  
+    /**
+     * Function called after the execution of each test method.
+     * 
+     * @param {nodeunit} test a reference to nodeunit.
+     */
+    tearDown : function(done) {
+        
+        // The 'docs' directory is only created by the 'testWithDefaultOptions'
+        grunt.file.delete('docs');
+
+        // Execution of our tearDown method is terminated
+        done();
+
+    },
+    
+    /**
+     * Test method used to test the execution of the plugin with the default options.
+     * 
+     * @param {nodeunit} test a reference to nodeunit.
+     */
+    testWithDefaultOptions : function(test) {
+
+        test.expect(2);
+        
+        // At the beginning no 'docs' directory exists
+        test.ok(!fs.existsSync('docs'));
+        
+        // Executes the plugin inside the 'target' directory to not pollute the project
+        grunt.util.spawn({
+            grunt: true,
+            args: ['phpdocumentor:testWithDefaultOptions', '--no-color']
+        }, function(err, result) {
+
+              // A 'docs' directory must have been created
+              test.ok(fs.existsSync('docs'));
+              
+              // Indicates that the execute of our test is terminated
+              test.done();
+
+        });
+        
+    },
+    
+    /**
+     * Test method used to test the execution of the plugin with the 'target' option.
+     * 
+     * @param {nodeunit} test a reference to nodeunit.
+     */
+    testWithTarget : function(test) {
+        
+        test.expect(2);
+        
+        // At the beginning no 'target/testWithTarget' directory exists
+        test.ok(!fs.existsSync('target/testWithTarget'));
+        
+        // Executes the plugin inside the 'target' directory to not pollute the project
+        grunt.util.spawn({
+            grunt: true,
+            args: ['phpdocumentor:testWithTarget', '--no-color']
+        }, function(err, result) {
+
+              // A 'target/testWithTarget' directory must have been created
+              test.ok(fs.existsSync('target/testWithTarget'));
+              
+              // Indicates that the execute of our test is terminated
+              test.done();
+
+        });
+        
+    }
+
 };

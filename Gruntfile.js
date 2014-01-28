@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
         // Before generating any new files, remove any previously-created files.
         clean : {
-            tests : [ 'tmp' ],
+            tests : [ 'target' ],
         },
 
         // Configuration to be run (and then tested).
@@ -31,9 +31,21 @@ module.exports = function(grunt) {
              * Sample target used to call a PHPDocumentor command like 'phpdoc -d dir -t target'
              */
             directory_target : {
+
                 options : {
                     directory : 'test/fixtures/directory_target',
                     target : 'tmp/directory_target'
+                }
+
+            },
+            
+            // Configuration used by the 'testWithDefaultOptions()' unit test method
+            testWithDefaultOptions : {},
+            
+            // Configuration used by the 'testWithTarget()' unit test method
+            testWithTarget : {
+                options : {
+                    target : 'target/testWithTarget'
                 }
             }
 
@@ -54,9 +66,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
 
-    // Whenever the "test" task is run, first clean the "tmp" dir, then run this
-    // plugin's task(s), then test the result.
-    grunt.registerTask('test', [ 'clean', 'phpdocumentor', 'nodeunit' ]);
+    // Whenever the "test" task is run, first clean the "tmp" dir, then run this plugin's task(s), then test the result.
+    grunt.registerTask('test', [ 'clean', 'nodeunit' ]);
 
     // By default, lint and run all tests.
     grunt.registerTask('default', [ 'jshint', 'test' ]);
