@@ -18,6 +18,7 @@ module.exports = function(grunt) {
             options : {
                 globalstrict : true,
                 globals : {
+                    console : true,
                     exports : true,
                     module : true,
                     require : true
