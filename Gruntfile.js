@@ -14,16 +14,10 @@ module.exports = function(grunt) {
     grunt.initConfig({
         
         jshint : {
-            all : [ 'Gruntfile.js', 'tasks/*.js', '<%= nodeunit.tests %>', ],
+            all : [ 'Gruntfile.js', 'tasks/*.js', 'test/*.js', ],
             options : {
-                globalstrict : true,
-                globals : {
-                    console : true,
-                    exports : true,
-                    module : true,
-                    require : true
-                }
-            },
+                jshintrc : '.jshintrc',
+            }
         },
 
         // Before generating any new files, remove any previously-created files.

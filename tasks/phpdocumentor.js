@@ -17,6 +17,7 @@ module.exports = function(grunt) {
     // creation: http://gruntjs.com/creating-tasks
     grunt.registerMultiTask('phpdocumentor', 'Runs the PHPDocumentor documentation generator tool.', function() {
         
+        // This function setup the plugin, it create a string which represents the phpDocumentor command line to execute
         phpDocumentor.setup(this);
         
         // This function first checks if PHP is available on command line and the executes phpDocumentor
