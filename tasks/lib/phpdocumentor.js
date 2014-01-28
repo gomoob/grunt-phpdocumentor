@@ -131,9 +131,13 @@ exports.init = function(grunt) {
         else {
             
             // path to the phar file
+            // WARNING: The quotes are very important otherwise the plugin will not work if it is executed within a 
+            // directory having spaces
             phpDocumentorCommand = 'php ';
+            phpDocumentorCommand += '"';
             phpDocumentorCommand += phar;
-            
+            phpDocumentorCommand += '"';
+
         }
         
         var target    = options.target     || 'docs',

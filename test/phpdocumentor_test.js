@@ -11,9 +11,6 @@ exports.phpdocumentor = {
      * @param {nodeunit} test a reference to nodeunit.
      */
     setUp: function(done) {
-
-        // The 'docs' directory is only created by the 'testWithDefaultOptions'
-        grunt.file.delete('docs');
         
         // Execution of our setUp method is terminated
         done();
@@ -26,9 +23,6 @@ exports.phpdocumentor = {
      * @param {nodeunit} test a reference to nodeunit.
      */
     tearDown : function(done) {
-        
-        // The 'docs' directory is only created by the 'testWithDefaultOptions'
-        grunt.file.delete('docs');
 
         // Execution of our tearDown method is terminated
         done();
@@ -51,13 +45,20 @@ exports.phpdocumentor = {
         grunt.util.spawn({
             grunt: true,
             args: ['phpdocumentor:testWithDefaultOptions', '--no-color']
-        }, function(err, result) {
+        }, function(error, result, code) {
 
-              // A 'docs' directory must have been created
-              test.ok(fs.existsSync('docs'));
+            // If an error occured we display the associated log
+            if(code > 0) {
+                
+                console.log(result);
+                
+            }
+            
+            // A 'docs' directory must have been created
+            test.ok(fs.existsSync('docs'));
               
-              // Indicates that the execute of our test is terminated
-              test.done();
+            // Indicates that the execute of our test is terminated
+            test.done();
 
         });
         
@@ -79,13 +80,20 @@ exports.phpdocumentor = {
         grunt.util.spawn({
             grunt: true,
             args: ['phpdocumentor:testWithTarget', '--no-color']
-        }, function(err, result) {
+        }, function(error, result, code) {
 
-              // A 'target/testWithTarget' directory must have been created
-              test.ok(fs.existsSync('target/testWithTarget'));
+            // If an error occured we display the associated log
+            if(code > 0) {
+                
+                console.log(result);
+                
+            }
               
-              // Indicates that the execute of our test is terminated
-              test.done();
+            // A 'target/testWithTarget' directory must have been created
+            test.ok(fs.existsSync('target/testWithTarget'));
+              
+            // Indicates that the execute of our test is terminated
+            test.done();
 
         });
         

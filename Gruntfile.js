@@ -26,9 +26,7 @@ module.exports = function(grunt) {
         },
 
         // Before generating any new files, remove any previously-created files.
-        clean : {
-            tests : [ 'target' ],
-        },
+        clean : [ 'docs', 'target' ],
 
         // Configuration to be run (and then tested).
         phpdocumentor : {
