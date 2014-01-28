@@ -68,6 +68,8 @@ Path where to store the generated output. It will default to a folder named 'doc
 
 ### 0.3.1
  
+ * Now the unit tests of the `develop` branch are executed on the GoMoob continuous integration server each time the 
+   source code is updated on this branch
  * Now the plugin inspects `[Exception]` in the phpDocumentor output to know if a phpDocumentor exception has been 
    encountered and make the Grunt task fail
  * Add the build with grunt badge to the README.MD file
