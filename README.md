@@ -39,6 +39,21 @@ grunt.initConfig({
 })
 ```
 
+or
+
+```js
+grunt.initConfig({
+  phpdocumentor: {
+    dist: {
+	options: {
+	        directory : './',
+        	target : 'docs'
+	}
+    }
+  },
+})
+```
+
 ### Options
 
 #### options.bin( optional )

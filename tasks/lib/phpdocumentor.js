@@ -76,8 +76,18 @@ exports.init = function(grunt) {
             config : ''
         };
 
+        //detect empty object
+        var isEmpty = function(obj) {
+            return Object.keys(obj).length === 0;
+        };
+
         // Merge task-specific and/or target-specific options with default option values.
-        options = runner.options(defaults);
+        if (isEmpty(runner.options()) === false) {
+            options = runner.options(defaults);
+        } else {
+            //merge defaults values + custom values
+            options = JSON.parse((JSON.stringify(defaults) + JSON.stringify(runner.data)).replace(/}{/g,","));
+        }
 
         // Create a "promise" object to indicate to Grunt when the execution of the plugin is terminated
         done = runner.async();
