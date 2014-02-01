@@ -90,6 +90,26 @@ Path to the phpdoc executable, by default it will use the one that come with tas
 **WARNING** : We kept this option documented here only for versions `0.1.0` and `0.3.0` of the plugin. This option has 
 been removed in version `0.4.0` because it was not portable across operating systems. 
 
+#### options.command ( optional )
+Type : `String`
+Default value: `run`
+
+The name of the phpDocumentor command to execute, the following phpDocumentor commands are available in phpDocumentor : 
+
+ * `help`              : Displays help for a command
+ * `list`              : Lists commands
+ * `parse`             : Creates a structure file from your source code
+ * `run`               : Parses and transforms the given files to a specified location
+ * `transform`         : Converts the PHPDocumentor structure file to documentation
+ * `project:parse`     : Creates a structure file from your source code
+ * `project:run`       : Parses and transforms the given files to a specified location
+ * `project:transform` : Converts the PHPDocumentor structure file to documentation
+ * `template:list`     : Displays a listing of all available templates in phpDocumentor
+
+**WARNING** : All the phpDocumentor commands can be called using the plugin, but for now you can only use the 
+phpDocumentor `[-t|--target[="..."]]` and `[-d|--directory[="..."]]` command line options which are not sufficient to 
+make the `transform` and `project:transform` correctly work.
+
 #### options.directory( optional )
 Type: `String`
 Default value: `./`

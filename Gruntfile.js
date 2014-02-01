@@ -70,6 +70,7 @@ module.exports = function(grunt) {
             
             // Configuration used by the 'testForTemplateGenerate()' unit test method
             // FIXME: 'template:generate' is not supported for the moment
+            // @see http://www.phpdoc.org/docs/latest/for-users/commands/template_generate.html
             /*testForTemplateGenerate : {
                 options : {
                     command : 'template:generate'
@@ -83,11 +84,13 @@ module.exports = function(grunt) {
                 }
             },
             
-            testForTemplatePackage : {
+            // Configuration used by the 'testForTemplatePackage()' unit test method
+            // FIXME: 'template:package' is not supported for the moment
+            /*testForTemplatePackage : {
                 options : {
                     command : 'template:package'
                 }
-            },
+            },*/
             
             // Configuration used by the 'testForTransform()' unit test method 
             // FIXME: 'transform' is not supported for the moment
