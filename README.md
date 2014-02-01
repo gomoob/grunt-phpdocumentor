@@ -161,6 +161,13 @@ Path where to store the generated output. It will default to a folder named 'doc
 
 ## Release History
 
+### 0.4.1
+ * Fix a documentation problem, the `options` object was not used in the configuration sample.
+ * Document the use of the `command` option
+ * Describe how to use the plugin with a Task Level options
+ * Describe how to use the plugin with multiple phpdocumentor targets
+ * Implement unit tests to run all the phpDocumentor commands (except the `transform` and `project:transform` commands
+
 ### 0.4.0
  
  * **BREAKING CHANGE, WARNING**: The `bin` option has been deleted and replaced by the `phar` option, if `null` is passed to the `phar` option then the plugin uses the `phpdoc` command available, if the `phar` option is `undefined` then the plugin uses the packaged phpDocumentor PHAR, if the `phar` option is not `null` and not `undefined` then it express a path to a phpDocumentor PHAR file on the file system
