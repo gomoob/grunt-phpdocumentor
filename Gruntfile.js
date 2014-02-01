@@ -23,8 +23,13 @@ module.exports = function(grunt) {
         // Before generating any new files, remove any previously-created files.
         clean : [ 'docs', 'target' ],
 
-        // Configuration to be run (and then tested).
+        // Task to be run (and then tested)
         phpdocumentor : {
+            
+            // Task-level options
+            options : {
+                command : 'run'
+            },
             
             // Configuration used by the 'testWithCustomPharFile()' unit test method
             testWithCustomPharFile : {
@@ -49,6 +54,13 @@ module.exports = function(grunt) {
             testWithTarget : {
                 options : {
                     target : 'target/testWithTarget'
+                }
+            },
+            
+            // Configuration used by the 'testOverwriteTaskLevelOptions()' unit test method
+            testWithTaskOptionsOverwriting : {
+                options : {
+                    command : 'help'
                 }
             }
 

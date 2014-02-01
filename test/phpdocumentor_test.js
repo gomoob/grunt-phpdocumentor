@@ -167,6 +167,41 @@ exports.phpdocumentor = {
 
         });
         
+    },
+    
+    /**
+     * Test method used to test the execution of the plugin for Task Level options overwriting.
+     */
+    testWithTaskOptionsOverwriting : function(test) {
+        
+        test.expect(1);
+        
+        // At the beginning no 'target/testWithCustomPharFile' directory exists
+        // test.ok(!fs.existsSync('target/testWithCustomPharFile'));
+        
+        // Executes the plugin using a new Grunt Process
+        grunt.util.spawn({
+            grunt: true,
+            args: ['phpdocumentor:testWithTaskOptionsOverwriting', '--no-color']
+        }, function(error, result, code) {
+
+            // If an error occured we display the associated log
+            if(code > 0) {
+                
+                console.log(result);
+                
+            }
+            
+            // We test that the output of the command contains the phpDocumentor 'help' command usage string
+            //  Usage : 
+            //    help [--xml] [--format="..."] [--raw] [command_name]
+            test.ok(result.stdout.indexOf('help [--xml] [--format="..."] [--raw] [command_name]') > 0);
+
+            // Indicates that the execute of our test is terminated
+            test.done();
+
+        });
+        
     }
 
 };

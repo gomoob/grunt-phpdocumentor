@@ -30,27 +30,52 @@ In your project's Gruntfile, add a section named `phpdocumentor` to the data obj
 
 ```js
 grunt.initConfig({
-  phpdocumentor: {
-    dist: {
-        directory : './',
-        target : 'docs'
-    }             
-  },
+    phpdocumentor: {
+        dist: {
+            options: {
+	            directory : './',
+                target : 'docs'
+            }
+        }
+    }
 })
 ```
 
-or
+You can also use many Grunt targets if you have several phpDocumentor documentations to generate. 
 
 ```js
 grunt.initConfig({
-  phpdocumentor: {
-    dist: {
-	options: {
-	        directory : './',
-        	target : 'docs'
-	}
+    phpdocumentor: {
+
+        // Place here Task level options (i.e common to all your phpDocumentor targets)
+        options : {
+            command : 'run',
+        },
+
+        // Grunt Target used to generate a first documentation
+        first_api_documentation : {
+            options: {
+                directory : 'src/first_api',
+                target : 'docs/first_api_documentation'
+            }
+        },
+
+        // Grunt target used to generate a second documentation
+        second_api_documentation : {
+            options : {
+                directory : 'src/second_api',
+                target : 'docs/second_api_documentation'
+            }
+        }, 
+        
+        // Sample target just used to display the phpDocumentor help
+        display_help : {
+            options : {
+                command : 'help'
+            }
+        }
+
     }
-  },
 })
 ```
 

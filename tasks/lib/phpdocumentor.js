@@ -76,18 +76,10 @@ exports.init = function(grunt) {
             config : ''
         };
 
-        //detect empty object
-        var isEmpty = function(obj) {
-            return Object.keys(obj).length === 0;
-        };
-
+        console.log(runner.options());
+        
         // Merge task-specific and/or target-specific options with default option values.
-        if (isEmpty(runner.options()) === false) {
-            options = runner.options(defaults);
-        } else {
-            //merge defaults values + custom values
-            options = JSON.parse((JSON.stringify(defaults) + JSON.stringify(runner.data)).replace(/}{/g,","));
-        }
+        options = runner.options(defaults);
 
         // Create a "promise" object to indicate to Grunt when the execution of the plugin is terminated
         done = runner.async();
@@ -159,7 +151,7 @@ exports.init = function(grunt) {
 
         var target    = options.target     || 'docs',
             directory = options.directory  || './';
-
+        
         // Providing no command or the 'run' command or the 'project:run' command is the same
         // @see http://www.phpdoc.org/docs/latest/references/commands/project_run.html
         if(options.command === undefined || options.command === 'run' || options.command === 'project:run') {
