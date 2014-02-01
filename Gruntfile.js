@@ -31,6 +31,72 @@ module.exports = function(grunt) {
                 command : 'run'
             },
             
+            // Configuration used by the 'testForList()' unit test method
+            testForList : {
+                options : {
+                    command : 'list'
+                }
+            },
+            
+            // Configuration used by the 'testForParse()' unit test method
+            testForParse : {
+                options : {
+                    command : 'parse'
+                }
+            },
+            
+            // Configuration used by the 'testForProjectParse()' unit test method
+            testForProjectParse : {
+                options : {
+                    command : 'project:parse'
+                }
+            },
+            
+            // Configuration used by the 'testForProjectRun()' unit test method
+            testForProjectRun : {
+                options : {
+                    command : 'project:run',
+                    target : 'target/testForProjectRun'
+                }
+            },
+            
+            // Configuration used by the 'testForProjectTransform()' unit test method
+            // FIXME: 'transform' is not supported for the moment
+            /*testForProjectTransform : {
+                options : {
+                    command : 'project:transform'
+                }
+            },*/
+            
+            // Configuration used by the 'testForTemplateGenerate()' unit test method
+            // FIXME: 'template:generate' is not supported for the moment
+            /*testForTemplateGenerate : {
+                options : {
+                    command : 'template:generate'
+                }
+            },*/
+
+            // Configuration used by the 'testForTemplateList()' unit test method 
+            testForTemplateList : {
+                options : {
+                    command : 'template:list'
+                }
+            },
+            
+            testForTemplatePackage : {
+                options : {
+                    command : 'template:package'
+                }
+            },
+            
+            // Configuration used by the 'testForTransform()' unit test method 
+            // FIXME: 'transform' is not supported for the moment
+            /*testForTransform : {
+                options : {
+                    command : 'transform'
+                }
+            },*/
+            
             // Configuration used by the 'testWithCustomPharFile()' unit test method
             testWithCustomPharFile : {
                 options : {

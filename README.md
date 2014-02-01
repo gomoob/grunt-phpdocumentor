@@ -66,9 +66,9 @@ grunt.initConfig({
                 directory : 'src/second_api',
                 target : 'docs/second_api_documentation'
             }
-        }, 
+        },
         
-        // Sample target just used to display the phpDocumentor help
+        // Sample target used to display the phpDocumentor help
         display_help : {
             options : {
                 command : 'help'

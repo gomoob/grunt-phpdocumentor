@@ -76,8 +76,6 @@ exports.init = function(grunt) {
             config : ''
         };
 
-        console.log(runner.options());
-        
         // Merge task-specific and/or target-specific options with default option values.
         options = runner.options(defaults);
 
