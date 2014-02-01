@@ -73,7 +73,10 @@ exports.init = function(grunt) {
             progressbar : '',
             template : '',
             parseprivate : '',
-            config : ''
+            config : '',
+            log: '',
+            quiet: '',
+            'no-interaction': ''
         };
 
         // Merge task-specific and/or target-specific options with default option values.
@@ -147,6 +150,33 @@ exports.init = function(grunt) {
 
         }
 
+        var renderParamsTuCmdRun = function (options) {
+            var cmd = '';
+            cmd += ' --target='+(options.target || 'docs');
+            cmd += ' --directory='+(options.directory || './');
+            cmd += (options.filename !== '')?' --filename='+options.filename:'';
+            cmd += (options.encoding !== '')?' --encoding='+options.encoding:'';
+            cmd += (options.extensions !== '')?' --extensions='+options.extensions:'';
+            cmd += (options.ignore !== '')?' --ignore='+options.ignore:'';
+            cmd += (options.hidden !== '')?' --hidden':'';
+            cmd += (options['ignore-symlinks'] !== '' && options['ignore-symlinks'] !== false)?' --ignore-symlinks':'';
+            cmd += (options.markers !== '')?' --markers='+options.markers:'';
+            cmd += (options.title !== '')?' --title="'+options.title+'"':'';
+            cmd += (options.force !== '' && options.force !== false)?' --force':'';
+            cmd += (options.validate !== '' && options.validate !== false)?' --validate':'';
+            cmd += (options.visibility !== '')?" --visibility='"+options.visibility+"'":'';
+            cmd += (options.defaultpackagename !== '')?" --defaultpackagename='"+options.defaultpackagename+"'":'';
+            cmd += (options.sourcecode !== '' && options.sourcecode !== false)?' --sourcecode':'';
+            cmd += (options.template !== '')?" --template='"+options.template+"'":'';
+            cmd += (options.parseprivate !== '' && options.parseprivate !== false)?' --parseprivate':'';
+            cmd += (options.config !== '')?" --config='"+options.config+"'":'';
+            cmd += (options.log !== '')?" --log='"+options.log+"'":'';
+            cmd += (options.quiet !== '' && options.quiet !== false)?' --quiet':'';
+            cmd += (options['no-interaction'] !== '' && options['no-interaction'] !== false)?' --no-interaction':'';
+
+            return cmd;
+        };
+
         var target    = options.target     || 'docs',
             directory = options.directory  || './';
         
@@ -154,9 +184,7 @@ exports.init = function(grunt) {
         // @see http://www.phpdoc.org/docs/latest/references/commands/project_run.html
         if(options.command === undefined || options.command === 'run' || options.command === 'project:run') {
 
-            phpDocumentorCommand += ' --target=' + target;
-            phpDocumentorCommand += ' --directory=' + directory;
-
+            phpDocumentorCommand += renderParamsTuCmdRun(options);
             // TODO: see the help of the command with 'phpdoc help run' and add the missing options
 
         } 
