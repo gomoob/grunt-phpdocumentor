@@ -37,7 +37,10 @@ exports.init = function(grunt) {
         
         // A string which reprents a PHPDocumentor command, this command is created in the 'setup()' method and 
         // executed in the 'run()' method
-        phpDocumentorCommand = '';
+        phpDocumentorCommand = '',
+
+        // A optional command String
+        phpDocumentorOptions = '';
 
     /**
      * Function used to setup the PHPDocument plugin, this function has to be called before the 'run' method.
@@ -149,13 +152,29 @@ exports.init = function(grunt) {
 
         var target    = options.target     || 'docs',
             directory = options.directory  || './';
-        
+
+        // setup the encoding options
+        var encoding = options.encoding;
+        if (encoding){
+            phpDocumentorOptions += ' --encoding=' + encoding;
+        }
+        // setup the template options
+        var template = options.template;
+        if (template){
+            phpDocumentorOptions += ' --template=' + template;
+        }
+        // setup the ignore options
+        var ignore = options.ignore;
+        if (ignore){
+            phpDocumentorOptions += ' --ignore=' + ignore;
+        }
         // Providing no command or the 'run' command or the 'project:run' command is the same
         // @see http://www.phpdoc.org/docs/latest/references/commands/project_run.html
         if(options.command === undefined || options.command === 'run' || options.command === 'project:run') {
 
             phpDocumentorCommand += ' --target=' + target;
             phpDocumentorCommand += ' --directory=' + directory;
+            phpDocumentorCommand += phpDocumentorOptions;
 
             // TODO: see the help of the command with 'phpdoc help run' and add the missing options
 
