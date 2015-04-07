@@ -157,7 +157,7 @@ exports.init = function(grunt) {
             cmd += (options.filename !== '')?' --filename='+options.filename:'';
             cmd += (options.encoding !== '')?' --encoding='+options.encoding:'';
             cmd += (options.extensions !== '')?' --extensions='+options.extensions:'';
-            cmd += (options.ignore !== '')?' --ignore='+options.ignore:'';
+            cmd += (options.ignore !== '')?' --ignore="'+options.ignore+'"':'';
             cmd += (options.hidden !== '')?' --hidden':'';
             cmd += (options['ignore-symlinks'] !== '' && options['ignore-symlinks'] !== false)?' --ignore-symlinks':'';
             cmd += (options.markers !== '')?' --markers='+options.markers:'';
