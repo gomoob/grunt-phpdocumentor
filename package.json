@@ -8,11 +8,13 @@
     "email": "baptiste.gaillard@gomoob.com",
     "url": "http://www.gomoob.com"
   },
-  "contributors": [{
-    "name": "Mitermayer Reis",
-    "email": "mitermayer.reis@gmail.com",
-    "url": "http://job.mitermayer.com"
-  }],
+  "contributors": [
+    {
+      "name": "Mitermayer Reis",
+      "email": "mitermayer.reis@gmail.com",
+      "url": "http://job.mitermayer.com"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/gomoob/grunt-phpdocumentor"
@@ -40,7 +42,7 @@
     "grunt": "~0.4.1"
   },
   "peerDependencies": {
-    "grunt": "~0.4.1"
+    "grunt": ">=0.4.0"
   },
   "keywords": [
     "gruntplugin"
