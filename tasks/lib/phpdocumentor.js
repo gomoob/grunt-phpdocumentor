@@ -37,7 +37,12 @@ exports.init = function(grunt) {
 
         // A string which reprents a PHPDocumentor command, this command is created in the 'setup()' method and
         // executed in the 'run()' method
-        phpDocumentorCommand = '';
+        phpDocumentorCommand = '',
+
+        // Options to pass to ChildProcess.exec() when phpDocumentor is executed
+        phpDocumentorCommandExecOptions = {
+          maxBuffer: 1048576 // 1 mebibyte
+        };
 
     /**
      * Function used to setup the PHPDocument plugin, this function has to be called before the 'run' method.
@@ -259,7 +264,7 @@ exports.init = function(grunt) {
         var exceptionEncountered = false;
 
         // Trigger the PHPDocument command execution
-        var childProcess = ChildProcess.exec(phpDocumentorCommand, function(error, stdout, stderr) {
+        var childProcess = ChildProcess.exec(phpDocumentorCommand, phpDocumentorCommandExecOptions, function(error, stdout, stderr) {
 
             // On success error will be null
             if(error !== null) {
